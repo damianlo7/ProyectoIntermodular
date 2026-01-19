@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Chemin"
         tools:targetApi="31">
         <activity
+            android:name=".restaurarContrasenha"
+            android:exported="false" />
+        <activity
             android:name=".Usuario"
             android:exported="false" />
         <activity
