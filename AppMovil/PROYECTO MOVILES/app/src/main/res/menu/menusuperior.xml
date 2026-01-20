@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:id="@+id/menu_mensajes"
+        android:icon="@drawable/chat"
+        android:title="Mensajes"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/menu_perfil"
+        android:icon="@drawable/perfil"
+        android:title="Perfil"
+        app:showAsAction="always" />
 </menu>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/btnEditPerfil"
+        android:icon="@drawable/editarperfil"
+        android:title="Editar Perfil"
+        app:showAsAction="withText" />
+    <item
+        android:id="@+id/btnConfiguracion"
+        android:icon="@drawable/configuracion"
+        android:title="Configuración" />
+    <item
+        android:id="@+id/btnMoscuro"
+        android:icon="@drawable/modooscuro"
+        android:title="Modo Oscuro" />
+    <item
+        android:id="@+id/btncSesion"
+        android:icon="@drawable/cerrarsesion"
+        android:title="Cerrar sesión" />
+</menu>

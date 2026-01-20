@@ -2,20 +2,24 @@ package com.example.chemin;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.appcompat.widget.Toolbar;
+
 
 import java.util.ArrayList;
 
@@ -26,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
     Button registrarse;
     Button oldpass;
     Button btnentrar;
-    ArrayList<Usuario> usuarios;
+    ArrayList<OpcionesUsuario> usuarios;
+
+//    Toolbar toolbar2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         registrarse = findViewById(R.id.registrarse);
         oldpass = findViewById(R.id.olpass);
         btnentrar = findViewById(R.id.btnentrar);
+//        toolbar2 = findViewById(R.id.toolbar2);
 
 
         ActivityResultLauncher<Intent> launcher = registerForActivityResult(new
@@ -55,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (intent != null){
                     if (intent.hasExtra("usuarioNuevo")){
-                        Usuario u = (Usuario) intent.getSerializableExtra("usuarioNuevo");
+                        OpcionesUsuario u = (OpcionesUsuario) intent.getSerializableExtra("usuarioNuevo");
                         usuarios.add(u);
                     }
                 }
@@ -68,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
 //                if (){
 //
 //                }
+                Intent intent = new Intent(getApplicationContext(), principal.class);
+                launcher.launch(intent);
+
             }
         });
 
@@ -99,19 +109,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
         
-
     }
 
 
-
-
-
-
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater menuInflater = getMenuInflater();
+//        menuInflater.inflate(R.menu.menusuperior,menu);
+//        return true;
+//    }
 }
