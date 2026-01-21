@@ -22,6 +22,10 @@ import androidx.appcompat.widget.Toolbar;
 
 
 import java.util.ArrayList;
+import androidx.appcompat.app.AppCompatDelegate;
+
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -107,16 +111,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //MODO OSCURO
+        AppCompatDelegate.setDefaultNightMode(
+                AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        );
+        AppCompatDelegate.setDefaultNightMode(
+                AppCompatDelegate.MODE_NIGHT_YES
+        );
 
 
-        
+
     }
 
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater menuInflater = getMenuInflater();
-//        menuInflater.inflate(R.menu.menusuperior,menu);
-//        return true;
-//    }
+//
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menusuperior,menu);
+        return true;
+    }
 }

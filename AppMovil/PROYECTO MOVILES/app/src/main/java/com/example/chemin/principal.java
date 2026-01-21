@@ -26,18 +26,28 @@ public class principal extends AppCompatActivity {
         });
     }
 
-    // 🔹 DIBUJA EL MENÚ ARRIBA
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menusuperior, menu);
         return true;
     }
 
-    // 🔹 DETECTA LOS CLICS
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
+
+        if (id == R.id.menu_mensajes){
+            Intent intent = new Intent(this, mensajes.class);
+            startActivity(intent);
+        }
+
+        if (id == R.id.menu_perfil){
+
+            Intent intent = new Intent(this, ajustesUsuario.class);
+            startActivity(intent);
+        }
 
 //        if (id == R.id.menu_home) {
 //            // Acción Inicio
