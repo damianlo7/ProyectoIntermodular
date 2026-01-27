@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/menu_anhadirpublicaciones"
+        android:icon="@drawable/anadir"
+        android:title="anahdirpublicaciones"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/menu_mensajes"
         android:icon="@drawable/chat"
         android:title="Mensajes"

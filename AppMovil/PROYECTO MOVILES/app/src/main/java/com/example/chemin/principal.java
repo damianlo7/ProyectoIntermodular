@@ -4,15 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 public class principal extends AppCompatActivity {
 
+    ArrayList<Publicaciones> publicaciones;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,13 +47,14 @@ public class principal extends AppCompatActivity {
         if (id == R.id.menu_mensajes){
             Intent intent = new Intent(this, mensajes.class);
             startActivity(intent);
-        }
-
-        if (id == R.id.menu_perfil){
-
+        }else if (id == R.id.menu_perfil){
             Intent intent = new Intent(this, ajustesUsuario.class);
             startActivity(intent);
+        }else if (id == R.id.menu_anhadirpublicaciones){
+            Intent intent = new Intent(this, gestionPublicacion.class);
+            startActivity(intent);
         }
+
 
 //        if (id == R.id.menu_home) {
 //            // Acción Inicio
@@ -62,5 +69,12 @@ public class principal extends AppCompatActivity {
 //        }
 
         return super.onOptionsItemSelected(item);
+    }
+    public class MyviewHolder extends RecyclerView.ViewHolder{
+
+
+        public MyviewHolder(@NonNull View itemView) {
+            super(itemView);
+        }
     }
 }

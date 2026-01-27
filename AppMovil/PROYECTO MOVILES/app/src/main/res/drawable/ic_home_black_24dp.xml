@@ -1,0 +1,30 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Marco -->
+    <path
+        android:pathData="M5,5h14v14H5z"
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#FF000000"
+        android:strokeWidth="1.5" />
+
+    <!-- Montañas -->
+    <path
+        android:pathData="M7,15l3,-4 3,4 3,-3 3,4"
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#FF000000"
+        android:strokeWidth="1.3"
+        android:strokeLineJoin="round"
+        android:strokeLineCap="round" />
+
+    <!-- Destello -->
+    <path
+        android:pathData="M15.5,7l0.5,1L17,8.5l-1,0.5L15.5,10l-0.5,-1L14,8.5l1,-0.5z"
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#FF000000"
+        android:strokeWidth="1.2"
+        android:strokeLineJoin="round" />
+</vector>

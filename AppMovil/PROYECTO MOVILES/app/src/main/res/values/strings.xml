@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Chemin</string>
+    <string name="title_activity_gestion_publicacion">gestionPublicacion</string>
+    <string name="title_home">Imagen</string>
+    <string name="title_dashboard">Texto</string>
+    <string name="title_notifications">Video</string>
 </resources>
