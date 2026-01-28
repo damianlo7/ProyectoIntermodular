@@ -45,8 +45,9 @@ public class principal extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.menu_mensajes){
-            Intent intent = new Intent(this, mensajes.class);
+            Intent intent = new Intent(this, ChatsActivity.class);
             startActivity(intent);
+
         }else if (id == R.id.menu_perfil){
             Intent intent = new Intent(this, ajustesUsuario.class);
             startActivity(intent);
