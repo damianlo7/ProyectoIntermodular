@@ -8,7 +8,7 @@
     tools:context=".ajustesUsuario">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnEditarPerfil"
         android:layout_width="346dp"
         android:layout_height="53dp"
         android:layout_marginStart="35dp"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/Configuracion"
+        android:id="@+id/btnConfiguracion"
         android:layout_width="334dp"
         android:layout_height="55dp"
         android:layout_marginStart="37dp"
@@ -32,13 +32,13 @@
         android:backgroundTint="@color/cian"
         android:text="Configuracion"
         app:icon="@drawable/configuracion"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintBottom_toTopOf="@+id/btnModoOscuro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/btnEditarPerfil" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnModoOscuro"
         android:layout_width="332dp"
         android:layout_height="58dp"
         android:layout_marginStart="37dp"
@@ -48,14 +48,14 @@
         android:backgroundTint="@color/cian"
         android:text="Modo oscuro"
         app:icon="@drawable/modooscuro"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintBottom_toTopOf="@+id/btnCarrarSesion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Configuracion" />
+        app:layout_constraintTop_toBottomOf="@+id/btnConfiguracion" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnCarrarSesion"
         android:layout_width="334dp"
         android:layout_height="56dp"
         android:layout_marginStart="35dp"
@@ -66,5 +66,21 @@
         app:icon="@drawable/cerrarsesion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/btnModoOscuro" />
+
+    <Button
+        android:id="@+id/btnEliminarCuenta"
+        android:layout_width="334dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="42dp"
+        android:backgroundTint="@color/cian"
+        android:text="Eliminar Cuenta"
+        app:icon="@drawable/eliminar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCarrarSesion" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

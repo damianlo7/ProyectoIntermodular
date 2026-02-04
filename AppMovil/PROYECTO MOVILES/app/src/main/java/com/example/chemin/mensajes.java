@@ -33,15 +33,12 @@ public class mensajes extends AppCompatActivity {
 
         rvMessages = findViewById(R.id.rvMessages);
 
-        // Lista de mensajes
         messageList = new ArrayList<>();
         messageList.add(new mensaje("Hola 👋"));
         messageList.add(new mensaje("¿Qué tal?"));
 
-        // Adapter
         adapter = new AdaptadorMensajes(messageList);
 
-        // LayoutManager
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setStackFromEnd(true);
         rvMessages.setLayoutManager(layoutManager);

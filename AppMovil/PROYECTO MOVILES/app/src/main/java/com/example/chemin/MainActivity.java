@@ -1,6 +1,7 @@
 package com.example.chemin;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -73,26 +74,39 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnentrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                if (){
-//
-//                }
-                Intent intent = new Intent(getApplicationContext(), principal.class);
-                launcher.launch(intent);
+        btnentrar.setOnClickListener(v -> {
 
+            String user = usuario.getText().toString().trim();
+            String pass = contrasenha.getText().toString().trim();
+
+            if (user.isEmpty() || pass.isEmpty()) {
+                usuario.setError("Obligatorio");
+                contrasenha.setError("Obligatorio");
+                return;
             }
+
+            Api api = new Api();
+            api.login(user, pass, success -> {
+
+                runOnUiThread(() -> {
+                    if (success) {
+                        SharedPreferences prefs = getSharedPreferences("CHEMIN", MODE_PRIVATE);
+                        prefs.edit()
+                                .putString("username", user)
+                                .apply();
+
+                        Intent intent = new Intent(MainActivity.this, principal.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        contrasenha.setText("");
+                        contrasenha.setError("Usuario o contraseña incorrectos");
+                    }
+                });
+
+            });
+
         });
-
-
-        oldpass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
 
 
         registrarse.setOnClickListener(new View.OnClickListener() {
@@ -110,18 +124,6 @@ public class MainActivity extends AppCompatActivity {
                 launcher.launch(intent);
             }
         });
-
-//        MODO OSCURO
-//        AppCompatDelegate.setDefaultNightMode(
-//                AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-//        );
-//        AppCompatDelegate.setDefaultNightMode(
-//                AppCompatDelegate.MODE_NIGHT_YES
-//        );
-
-
-
-
 
 
     }
