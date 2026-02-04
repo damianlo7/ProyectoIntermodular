@@ -17,3 +17,7 @@ Implementación de los menús de mensajes y ajustes de usuario.
 
 **27/01/2026**  
 Desarrollo de la interfaz de publicaciones mediante `BottomNavigationView` y fragmentos.
+
+**29/1/2026 - 04/2/2026**
+
+Creación de la API, integración en el proyecto para la gestión de usuarios, creación y edición de sus perfiles.
