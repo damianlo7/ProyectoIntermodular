@@ -4,13 +4,15 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 public class Api {
-
     public interface ApiCallback<T> {
         void onResult(T result);
     }
@@ -114,46 +116,52 @@ public class Api {
 //            }
 //        }).start();
 //    }
-    public void actualizarUsuario(Usuario u, ApiCallback<Boolean> callback) {
-        new Thread(() -> {
-            HttpURLConnection conn = null;
-            try {
-                URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario/actualizar");
-                conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("POST"); // según tu backend
-                conn.setRequestProperty("Content-Type", "application/json");
-                conn.setDoOutput(true);
+public void actualizarUsuario(Usuario u, ApiCallback<Boolean> callback) {
+    new Thread(() -> {
+        HttpURLConnection conn = null;
+        try {
+            URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario/actualizar");
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST"); // o PUT si cambias el backend
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setDoOutput(true);
 
-                // Construir JSON
-                JSONObject json = new JSONObject();
-                json.put("nombreCompleto", u.getNombreCompleto());
-                json.put("username", u.getUsername());
-                json.put("email", u.getEmail());
+            JSONObject json = new JSONObject();
+            json.put("nombreCompleto", u.getNombreCompleto());
+            json.put("username", u.getUsername());
+            json.put("email", u.getEmail());
+            if (u.getContrasenha() != null && !u.getContrasenha().isEmpty()) {
                 json.put("contrasenha", u.getContrasenha());
-                json.put("genero", u.getGenero());
-
-                try (OutputStream os = conn.getOutputStream()) {
-                    os.write(json.toString().getBytes(StandardCharsets.UTF_8));
-                }
-
-                int code = conn.getResponseCode();
-
-                // Leer InputStream para evitar leaks
-                try (var is = (code >= 200 && code < 400) ? conn.getInputStream() : conn.getErrorStream()) {
-                    if (is != null) {
-                        while (is.read() != -1); // leer todo el contenido aunque no lo uses
-                    }
-                }
-
-                if (callback != null) callback.onResult(code == 200);
-
-            } catch (Exception e) {
-                Log.e("API", "Error actualizarUsuario", e);
-                if (callback != null) callback.onResult(false);
-            } finally {
-                if (conn != null) conn.disconnect();
             }
-        }).start();
-    }
+            json.put("genero", u.getGenero());
+
+            try (OutputStream os = conn.getOutputStream()) {
+                os.write(json.toString().getBytes(StandardCharsets.UTF_8));
+            }
+
+            int code = conn.getResponseCode();
+
+
+            InputStream is = (code >= 400) ? conn.getErrorStream() : conn.getInputStream();
+            if (is != null) {
+                StringBuilder resp = new StringBuilder();
+                try (var reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) resp.append(line);
+                }
+                Log.d("API", "Actualizar usuario - code: " + code + " resp: " + resp);
+            }
+
+            if (callback != null) callback.onResult(code == 200);
+
+        } catch (Exception e) {
+            Log.e("API", "Error actualizarUsuario", e);
+            if (callback != null) callback.onResult(false);
+        } finally {
+            if (conn != null) conn.disconnect();
+        }
+    }).start();
+}
+
 
 }

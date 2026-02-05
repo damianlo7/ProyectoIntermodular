@@ -1,6 +1,7 @@
 package com.example.chemin;
 
 import android.os.Bundle;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -29,6 +30,15 @@ public class gestionPublicacion extends AppCompatActivity {
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_gestion_publicacion);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+
+
+
     }
+
+
+
+
+
 
 }
