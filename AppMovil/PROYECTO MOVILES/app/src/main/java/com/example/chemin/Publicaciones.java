@@ -5,6 +5,7 @@ public class Publicaciones {
     private int id_usuario;
     private int fecha_publicacion;
 
+    private String tipo_publicacion;
     public int getId_publicacion(){
         return id_publicacion;
     }
@@ -20,7 +21,6 @@ public class Publicaciones {
     public void setId_usuario(int id_usuario) {
         this.id_usuario = id_usuario;
     }
-
     public int getFecha_publicacion() {
         return fecha_publicacion;
     }
@@ -30,9 +30,18 @@ public class Publicaciones {
     }
 
 
-   public Publicaciones(int id_publicacion, int id_usuario, int fecha_publicacion){
+    public String getTipo_publicacion(){
+        return tipo_publicacion;
+    }
+
+    public void setTipo_publicacion(String tipo_publicacion){
+        this.tipo_publicacion = tipo_publicacion;
+    }
+
+   public Publicaciones(int id_publicacion, int id_usuario, int fecha_publicacion,String tipo_publicacion){
         this.fecha_publicacion = fecha_publicacion;
         this.id_publicacion = id_publicacion;
         this.id_usuario = id_usuario;
+        this.tipo_publicacion = tipo_publicacion;
    }
 }

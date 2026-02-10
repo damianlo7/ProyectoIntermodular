@@ -1,10 +1,16 @@
 package com.example.chemin;
 
+import static android.util.Base64.encodeToString;
+
+import android.content.Context;
+import android.net.Uri;
+import android.util.Base64;
 import android.util.Log;
 
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -162,6 +168,54 @@ public void actualizarUsuario(Usuario u, ApiCallback<Boolean> callback) {
         }
     }).start();
 }
+    public void subirImagen(Uri imageUri, Context context, String nombre) {
+        new Thread(() -> {
+            HttpURLConnection con = null;
+            try {
+                InputStream is = context.getContentResolver().openInputStream(imageUri);
+                if (is == null) {
+                    Log.e("UPLOAD", "InputStream nulo");
+                    return;
+                }
 
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int bytesRead;
+                while ((bytesRead = is.read(buffer)) != -1) {
+                    baos.write(buffer, 0, bytesRead);
+                }
+                is.close();
+
+                String base64Imagen = Base64.encodeToString(baos.toByteArray(), Base64.NO_WRAP);
+
+                JSONObject json = new JSONObject();
+                json.put("nombre", nombre);
+                json.put("imagen", base64Imagen); // aquí sí la variable
+
+                URL url = new URL("http://172.16.0.79:8080/tema5maven/rest/deportistas/imagen");
+                con = (HttpURLConnection) url.openConnection();
+                con.setRequestMethod("POST");
+                con.setDoOutput(true);
+                con.setDoInput(true);
+                con.setConnectTimeout(15000);
+                con.setReadTimeout(15000);
+                con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+
+                try (OutputStream os = con.getOutputStream()) {
+                    byte[] input = json.toString().getBytes(StandardCharsets.UTF_8);
+                    os.write(input);
+                    os.flush();
+                }
+
+                int code = con.getResponseCode();
+                Log.i("UPLOAD", "Código respuesta: " + code);
+
+            } catch (Exception e) {
+                Log.e("UPLOAD", "Error al subir la imagen", e);
+            } finally {
+                if (con != null) con.disconnect();
+            }
+        }).start();
+    }
 
 }
