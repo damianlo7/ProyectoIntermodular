@@ -21,3 +21,12 @@ Desarrollo de la interfaz de publicaciones mediante `BottomNavigationView` y fra
 **29/1/2026 - 04/2/2026**
 
 Creación de la API, integración en el proyecto para la gestión de usuarios, creación y edición de sus perfiles.
+
+**5/2/2026**
+Implementacion para la edicion de los perfiles de los usuarios
+
+**10/2/2026**
+gestion de inicio de sesion y avances en la subida de imagenes en la bd
+
+**11/2/2026 - 15/2/2026**
+implementacion completa para subir las imagenes a la bd y conseguir recuperarlas en android, a demas de investigar para conseguir seleccionar las imagenes de la galeria a partir de Android 12.
