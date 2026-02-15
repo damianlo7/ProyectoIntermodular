@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnentrar.setOnClickListener(v -> {
-
             String user = usuario.getText().toString().trim();
             String pass = contrasenha.getText().toString().trim();
 
@@ -86,15 +85,20 @@ public class MainActivity extends AppCompatActivity {
             }
 
             Api api = new Api();
-            api.login(user, pass, success -> {
-
+            api.login(user, pass, usuarioObj -> {
                 runOnUiThread(() -> {
-                    if (success) {
+                    if (usuarioObj != null) {
+                        // Guardamos en SharedPreferences
                         SharedPreferences prefs = getSharedPreferences("CHEMIN", MODE_PRIVATE);
                         prefs.edit()
-                                .putString("username", user)
+                                .putString("username", usuarioObj.getUsername())
+                                .putString("nombreCompleto", usuarioObj.getNombreCompleto())
+                                .putString("email", usuarioObj.getEmail())
+                                .putString("genero", usuarioObj.getGenero())
+                                .putInt("id", usuarioObj.getId())
                                 .apply();
 
+                        // Vamos a principal
                         Intent intent = new Intent(MainActivity.this, principal.class);
                         startActivity(intent);
                         finish();
@@ -103,10 +107,13 @@ public class MainActivity extends AppCompatActivity {
                         contrasenha.setError("Usuario o contraseña incorrectos");
                     }
                 });
-
             });
 
         });
+
+
+
+
 
 
         registrarse.setOnClickListener(new View.OnClickListener() {

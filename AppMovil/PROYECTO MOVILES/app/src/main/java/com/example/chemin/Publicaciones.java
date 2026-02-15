@@ -1,38 +1,65 @@
 package com.example.chemin;
 
 public class Publicaciones {
-    private int id_publicacion;
-    private int id_usuario;
-    private int fecha_publicacion;
 
-    public int getId_publicacion(){
-        return id_publicacion;
+    private int id;
+    private int idUsuario;
+    private String nombre;
+    private String texto;
+    private String imagen;
+    private String otro;
+
+    public Publicaciones(int id, int idUsuario, String nombre, String texto, String imagen, String otro) {
+        this.id = id;
+        this.idUsuario = idUsuario;
+        this.nombre = nombre;
+        this.texto = texto;
+        this.imagen = imagen;
+        this.otro = otro;
     }
 
-    public void setId_publicacion(int id_publicacion) {
-        this.id_publicacion = id_publicacion;
+    public Publicaciones(String texto, String imagen, String otro) {
+        this.texto = texto;
+        this.imagen = imagen;
+        this.otro = otro;
+        this.id = 0;
+        this.idUsuario = 0;
+        this.nombre = "";
     }
 
-    public int getId_usuario() {
-        return id_usuario;
+    public Publicaciones(String texto, String imagen) {
+        this.texto = texto;
+        this.imagen = imagen;
+        this.otro = "";
+        this.id = 0;
+        this.idUsuario = 0;
+        this.nombre = "";
     }
 
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+    public Publicaciones(String texto) {
+        this.texto = texto;
+        this.imagen = null;
+        this.otro = "";
+        this.id = 0;
+        this.idUsuario = 0;
+        this.nombre = "";
     }
 
-    public int getFecha_publicacion() {
-        return fecha_publicacion;
-    }
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public void setFecha_publicacion(int fecha_publicacion) {
-        this.fecha_publicacion = fecha_publicacion;
-    }
+    public int getIdUsuario() { return idUsuario; }
+    public void setIdUsuario(int idUsuario) { this.idUsuario = idUsuario; }
 
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-   public Publicaciones(int id_publicacion, int id_usuario, int fecha_publicacion){
-        this.fecha_publicacion = fecha_publicacion;
-        this.id_publicacion = id_publicacion;
-        this.id_usuario = id_usuario;
-   }
+    public String getTexto() { return texto; }
+    public void setTexto(String texto) { this.texto = texto; }
+
+    public String getImagen() { return imagen; }
+    public void setImagen(String imagen) { this.imagen = imagen; }
+
+    public String getOtro() { return otro; }
+    public void setOtro(String otro) { this.otro = otro; }
 }

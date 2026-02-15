@@ -9,11 +9,20 @@ public class Usuario implements Serializable {
     private String contrasenha;
     private String genero;
 
+    private int id;
     public Usuario(String nombreCompleto, String username, String email, String contrasenha) {
         this.nombreCompleto = nombreCompleto;
         this.username = username;
         this.email = email;
         this.contrasenha = contrasenha;
+    }
+
+    public Usuario(String nombreCompleto, String username, String email, String contrasenha, int id) {
+        this.nombreCompleto = nombreCompleto;
+        this.username = username;
+        this.email = email;
+        this.contrasenha = contrasenha;
+        this.id = id;
     }
 
     public Usuario(String username, String email) {
@@ -36,6 +45,14 @@ public class Usuario implements Serializable {
     public String getGenero() { return genero; }
     public void setGenero(String genero) { this.genero = genero; }
 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombreCompleto;

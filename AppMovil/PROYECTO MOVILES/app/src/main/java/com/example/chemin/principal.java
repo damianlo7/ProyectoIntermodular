@@ -1,28 +1,35 @@
 package com.example.chemin;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.content.Intent;
 
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
+import androidx.core.graphics.Insets;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class principal extends AppCompatActivity {
 
-    ArrayList<Publicaciones> publicaciones;
+    ArrayList<Publicaciones> lista = new ArrayList<>();
+    AdaptadorPublicaciones adaptador;
+    RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_principal);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -30,6 +37,13 @@ public class principal extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adaptador = new AdaptadorPublicaciones(lista);
+        recyclerView.setAdapter(adaptador);
+
+        cargarPublicaciones();
     }
 
     @Override
@@ -38,44 +52,46 @@ public class principal extends AppCompatActivity {
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int id = item.getItemId();
 
         if (id == R.id.menu_mensajes){
-            Intent intent = new Intent(this, ChatsActivity.class);
-            startActivity(intent);
-
-        }else if (id == R.id.menu_perfil){
-            Intent intent = new Intent(this, ajustesUsuario.class);
-            startActivity(intent);
-        }else if (id == R.id.menu_anhadirpublicaciones){
-            Intent intent = new Intent(this, gestionPublicacion.class);
-            startActivity(intent);
+            startActivity(new Intent(this, ChatsActivity.class));
+        } else if (id == R.id.menu_perfil){
+            startActivity(new Intent(this, editarPerfil.class));
+        } else if (id == R.id.menu_anhadirpublicaciones){
+            startActivity(new Intent(this, gestionPublicacion.class));
         }
-
-
-//        if (id == R.id.menu_home) {
-//            // Acción Inicio
-//            return true;
-//        }
-//
-//        if (id == R.id.menu_settings) {
-//            // Ejemplo: abrir otra activity
-//            // Intent intent = new Intent(this, SettingsActivity.class);
-//            // startActivity(intent);
-//            return true;
-//        }
 
         return super.onOptionsItemSelected(item);
     }
-    public class MyviewHolder extends RecyclerView.ViewHolder{
 
+    private void cargarPublicaciones() {
+        String url = "http://10.0.2.2:8080/tema5maven/rest/publicacion/todas";
+        RequestQueue queue = Volley.newRequestQueue(this);
 
-        public MyviewHolder(@NonNull View itemView) {
-            super(itemView);
-        }
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                response -> {
+                    lista.clear();
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject obj = response.getJSONObject(i);
+                            String texto = obj.optString("nombre","");
+                            String imagenBase64 = obj.optString("imagen","");
+                            lista.add(new Publicaciones(texto, imagenBase64));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    adaptador.notifyDataSetChanged();
+                },
+                error -> error.printStackTrace()
+        );
+
+        queue.add(request);
     }
 }
