@@ -22,7 +22,6 @@ public class Api {
         void onResult(T result);
     }
 
-    // En Api.java
     public void login(String username, String password, ApiCallback<Usuario> callback) {
         new Thread(() -> {
             HttpURLConnection conn = null;

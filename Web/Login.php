@@ -2,6 +2,7 @@
 session_start();
 require_once "Usuario.php";
 var_dump($_POST);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $username = $_POST["username"];
@@ -10,16 +11,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $api = new Usuario();
     $respuesta = $api->login($username, $password);
 
-    if ($respuesta && $respuesta["status"] == "ok") {
+    if ($respuesta && isset($respuesta["id"])) {
 
-        // Guardar sesión
         $_SESSION["usuario"] = $username;
 
-        // Ir al menú
         header("Location: menu.php");
         exit;
 
     } else {
-        echo "Credenciales incorrectas";
+        $mensaje = $respuesta["message"] ?? "Credenciales incorrectas";
+        echo $mensaje;
     }
 }
+?>
