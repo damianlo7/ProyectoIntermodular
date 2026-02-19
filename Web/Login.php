@@ -12,13 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $respuesta = $api->login($username, $password);
 
     if ($respuesta && isset($respuesta["id"])) {
-
         $_SESSION["usuario"] = $username;
-
+        $_SESSION["id"] = $respuesta["id"]; 
         header("Location: menu.php");
         exit;
-
-    } else {
+    }else {
         $mensaje = $respuesta["message"] ?? "Credenciales incorrectas";
         echo $mensaje;
     }

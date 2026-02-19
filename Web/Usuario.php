@@ -40,4 +40,23 @@ class Usuario {
 
         return $this->request("POST", "/usuario/login", $data);
     }
+
+    public function subirImagen($idUsuario, $nombre, $imagen) {
+        $data = [
+            "idUsuario" => $idUsuario,
+            "nombre" => $nombre,
+            "imagen" => $imagen
+        ];
+        return $this->request("POST", "/publicacion/imagen", $data);
+    }
+    
+    public function getPublicaciones() {
+        return $this->request("GET", "/publicacion/lista");
+    }
+    public function eliminarPublicacion($id) {
+        return $this->request("DELETE", "/publicacion/eliminar/{$id}");
+    }
+    public function eliminarCuenta($id) {
+        return $this->request("DELETE", "/usuario/eliminar/{$id}");
+    }
 }

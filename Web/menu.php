@@ -70,7 +70,7 @@ if (!isset($_SESSION["usuario"])) {
         <div class="d-flex align-items-center gap-2">
             <img src="img/iconos/anadir.png" class="toolbar-btn" alt="Subir imagen" onclick="document.getElementById('inputArchivo').click()">
             <img src="img/iconos/chat.png" class="toolbar-btn" alt="Botón 2" onclick="alert('Botón 2')">
-            <img src="img/iconos/usuario.png" class="toolbar-btn" alt="Cerrar sesión" onclick="cerrarSesion()">
+            <img src="img/iconos/usuario.png" class="toolbar-btn" alt="Perfil" onclick="window.location.href='ajustes.php'">
         </div>
     </div>
 
@@ -79,36 +79,65 @@ if (!isset($_SESSION["usuario"])) {
     <div class="contenedor-publicaciones" id="contenedor-publicaciones"></div>
 
     <script>
-        let publicacionesTotales = [];
-
         async function cargarTodasPublicaciones() {
             try {
-                const res = await fetch('http://localhost:8080/tema5maven/rest/publicacion/lista');
+                const res = await fetch('get_publicaciones.php');
                 const data = await res.json();
                 if (!Array.isArray(data)) return;
-                publicacionesTotales = data;
-                mostrarPublicacionesUnaPorUna();
+                mostrarPublicaciones(data);
             } catch (error) {
                 console.error('Error al cargar publicaciones', error);
             }
         }
 
-        function mostrarPublicacionesUnaPorUna() {
-            const contenedor = document.getElementById('contenedor-publicaciones');
-            contenedor.innerHTML = '';
-            publicacionesTotales.forEach(pub => {
-                const card = document.createElement('div');
-                card.className = 'card card-publicacion';
-                card.innerHTML = `
-                    <img src="data:image/jpeg;base64,${pub.imagen}" class="card-img-top" />
-                    <div class="card-body">
-                        <h5 class="card-title">${pub.nombre}</h5>
-                        <p class="card-text">Usuario: ${pub.idUsuario}</p>
-                    </div>
-                `;
-                contenedor.appendChild(card);
+        function mostrarPublicaciones(publicaciones) {
+    const contenedor = document.getElementById('contenedor-publicaciones');
+    contenedor.innerHTML = '';
+    const idSesion = <?php echo $_SESSION["id"]; ?>;
+    
+    publicaciones.forEach(pub => {
+        const card = document.createElement('div');
+        card.className = 'card card-publicacion';
+
+        const wrapper = document.createElement('div');
+        wrapper.style.position = 'relative';
+
+        const img = document.createElement('img');
+        img.src = 'data:image/jpeg;base64,' + pub.imagen;
+        img.className = 'card-img-top';
+        wrapper.appendChild(img);
+
+        if (pub.idUsuario === idSesion) {
+            const btnDiv = document.createElement('div');
+            btnDiv.style.position = 'absolute';
+            btnDiv.style.top = '8px';
+            btnDiv.style.right = '8px';
+
+            const btn = document.createElement('button');
+            btn.className = 'btn btn-light btn-sm';
+            btn.style.borderRadius = '50%';
+            btn.style.width = '32px';
+            btn.style.height = '32px';
+            btn.style.padding = '0';
+            btn.style.fontSize = '16px';
+            btn.textContent = '⋯';
+            btn.addEventListener('click', () => {
+                if (confirm('¿Eliminar esta publicación?')) eliminarPublicacion(pub.id);
             });
+
+            btnDiv.appendChild(btn);
+            wrapper.appendChild(btnDiv);
         }
+
+        const body = document.createElement('div');
+        body.className = 'card-body';
+        body.innerHTML = '<p class="card-text">@' + pub.username + '</p>';
+
+        card.appendChild(wrapper);
+        card.appendChild(body);
+        contenedor.appendChild(card);
+    });
+}
 
         async function subirImagen(file) {
             if (!file || !file.type.startsWith('image/')) {
@@ -123,10 +152,15 @@ if (!isset($_SESSION["usuario"])) {
             reader.onload = async function(e) {
                 const base64 = e.target.result.split(',')[1];
                 try {
-                    const res = await fetch('http://localhost:8080/tema5maven/rest/publicacion/imagen', {
+                    const res = await fetch('subir_imagen.php', {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ nombre: nombre, imagen: base64, idUsuario: 1 })
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            nombre: nombre,
+                            imagen: base64
+                        })
                     });
                     if (res.ok) {
                         alert('Imagen subida correctamente');
@@ -142,10 +176,26 @@ if (!isset($_SESSION["usuario"])) {
             reader.readAsDataURL(file);
         }
 
-        function cerrarSesion() {
-            fetch('logout.php').then(() => {
-                window.location.href = 'index.html';
-            });
+        async function eliminarPublicacion(id) {
+            if (!confirm('¿Eliminar esta publicación?')) return;
+            try {
+                const res = await fetch('eliminar_publicacion.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id: id
+                    })
+                });
+                if (res.ok) {
+                    cargarTodasPublicaciones();
+                } else {
+                    alert('Error al eliminar');
+                }
+            } catch (err) {
+                console.error(err);
+            }
         }
 
         window.onload = cargarTodasPublicaciones;
