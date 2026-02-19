@@ -252,4 +252,39 @@ public class Api {
             }
         }).start();
     }
+
+    public void eliminarUsuario(int idUsuario, ApiCallback<Boolean> callback) {
+        new Thread(() -> {
+            HttpURLConnection conn = null;
+            try {
+                URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario/eliminar/" + idUsuario);
+                conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("DELETE");
+                conn.setConnectTimeout(10000);
+                conn.setReadTimeout(10000);
+
+                int code = conn.getResponseCode();
+                InputStream is = (code >= 400) ? conn.getErrorStream() : conn.getInputStream();
+                if (is != null) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+                    StringBuilder resp = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) resp.append(line);
+                    Log.d("API", "Eliminar usuario - code: " + code + " resp: " + resp);
+                }
+
+                if (callback != null) callback.onResult(code == 200);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                if (callback != null) callback.onResult(false);
+            } finally {
+                if (conn != null) conn.disconnect();
+            }
+        }).start();
+    }
+
+
+
+
 }

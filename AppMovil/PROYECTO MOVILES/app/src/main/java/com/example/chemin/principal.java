@@ -59,7 +59,7 @@ public class principal extends AppCompatActivity {
         if (id == R.id.menu_mensajes){
             startActivity(new Intent(this, ChatsActivity.class));
         } else if (id == R.id.menu_perfil){
-            startActivity(new Intent(this, editarPerfil.class));
+            startActivity(new Intent(this, ajustesUsuario.class));
         } else if (id == R.id.menu_anhadirpublicaciones){
             startActivity(new Intent(this, gestionPublicacion.class));
         }
@@ -68,7 +68,7 @@ public class principal extends AppCompatActivity {
     }
 
     private void cargarPublicaciones() {
-        String url = "http://10.0.2.2:8080/tema5maven/rest/publicacion/todas";
+        String url = "http://10.0.2.2:8080/tema5maven/rest/publicacion/lista";
         RequestQueue queue = Volley.newRequestQueue(this);
 
         JsonArrayRequest request = new JsonArrayRequest(
@@ -80,9 +80,11 @@ public class principal extends AppCompatActivity {
                     for (int i = 0; i < response.length(); i++) {
                         try {
                             JSONObject obj = response.getJSONObject(i);
-                            String texto = obj.optString("nombre","");
+//                            String texto = obj.optString("nombre","");
+//                            String imagenBase64 = obj.optString("imagen","");
+//                            lista.add(new Publicaciones(texto, imagenBase64));
                             String imagenBase64 = obj.optString("imagen","");
-                            lista.add(new Publicaciones(texto, imagenBase64));
+                            lista.add(new Publicaciones("", imagenBase64));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

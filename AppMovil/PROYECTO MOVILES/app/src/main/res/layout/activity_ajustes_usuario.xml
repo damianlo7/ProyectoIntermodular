@@ -16,7 +16,6 @@
         android:layout_marginEnd="30dp"
         android:backgroundTint="@color/cian"
         android:text="Editar perfil"
-        app:icon="@drawable/editarperfil"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,45 +27,27 @@
         android:layout_marginStart="37dp"
         android:layout_marginTop="41dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="34dp"
         android:backgroundTint="@color/cian"
         android:text="Configuracion"
         app:icon="@drawable/configuracion"
-        app:layout_constraintBottom_toTopOf="@+id/btnModoOscuro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnEditarPerfil" />
-
-    <Button
-        android:id="@+id/btnModoOscuro"
-        android:layout_width="332dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginBottom="62dp"
-        android:backgroundTint="@color/cian"
-        android:text="Modo oscuro"
-        app:icon="@drawable/modooscuro"
-        app:layout_constraintBottom_toTopOf="@+id/btnCarrarSesion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnConfiguracion" />
 
     <Button
         android:id="@+id/btnCarrarSesion"
         android:layout_width="334dp"
         android:layout_height="56dp"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="42dp"
         android:backgroundTint="@color/cian"
         android:text="Cerrar sesion"
         app:icon="@drawable/cerrarsesion"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnModoOscuro" />
+        app:layout_constraintTop_toBottomOf="@+id/btnConfiguracion" />
 
     <Button
         android:id="@+id/btnEliminarCuenta"
