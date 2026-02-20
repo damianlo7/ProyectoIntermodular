@@ -19,21 +19,27 @@ Implementación de los menús de mensajes y ajustes de usuario.
 Desarrollo de la interfaz de publicaciones mediante `BottomNavigationView` y fragmentos.
 
 **29/1/2026 - 04/2/2026**
+<br>
 Creación de la API, integración en el proyecto para la gestión de usuarios, creación y edición de sus perfiles.
 
 **5/2/2026**
+<br>
 Implementacion para la edicion de los perfiles de los usuarios.
 
 **10/2/2026**
+<br>
 gestion de inicio de sesion y avances en la subida de imagenes en la bd.
 
 **11/2/2026 - 15/2/2026**
+<br>
 implementacion completa para subir las imagenes a la bd y conseguir recuperarlas en android, a demas de investigar para conseguir seleccionar las imagenes de la galeria a partir de Android 12.
 
 **16/2/2026**
+<br>
 Finalizado la parte de gestion de publicaciones, las imagenes se pueden subir correctamente a la bd, la web ya permite ver las imagenes subidas.
 
 **19/2/2026**
+<br>
 Avances en la pagina web, ahora se permite la eliminacion de publicaciones y la eliminacion de usuarios.
 
 **20/2/2026**
