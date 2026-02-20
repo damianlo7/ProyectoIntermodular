@@ -43,4 +43,5 @@ Finalizado la parte de gestion de publicaciones, las imagenes se pueden subir co
 Avances en la pagina web, ahora se permite la eliminacion de publicaciones y la eliminacion de usuarios.
 
 **20/2/2026**
+<br>
 Implementacion de registro web, mensajes en el chat general, sistema de edicion de los datos del usuario
