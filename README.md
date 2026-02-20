@@ -34,4 +34,7 @@ implementacion completa para subir las imagenes a la bd y conseguir recuperarlas
 Finalizado la parte de gestion de publicaciones, las imagenes se pueden subir correctamente a la bd, la web ya permite ver las imagenes subidas.
 
 **19/2/2026**
-Evances en la pagina web, ahora se permite la eliminacion de publicaciones y la eliminacion de usuarios.
+Avances en la pagina web, ahora se permite la eliminacion de publicaciones y la eliminacion de usuarios.
+
+**20/2/2026**
+Implementacion de registro web, mensajes en el chat general, sistema de edicion de los datos del usuario
