@@ -45,7 +45,7 @@ if (!isset($_SESSION["usuario"])) {
 <body>
     <h2>Ajustes</h2>
 
-    <button class="btn btn-ajuste" onclick="window.location.href='editarPerfil.php'">Editar perfil</button>
+    <button class="btn btn-ajuste" onclick="window.location.href='editarPerfil.html'">Editar perfil</button>
     <button class="btn btn-ajuste" onclick="alert('Próximamente')">Configuración</button>
     <button class="btn btn-ajuste" onclick="cerrarSesion()">Cerrar sesión</button>
     <button class="btn btn-ajuste" onclick="confirmarEliminar()">Eliminar cuenta</button>

@@ -78,7 +78,6 @@
         android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Name"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -89,7 +88,7 @@
         android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Name"
+        android:password="true"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -100,7 +99,6 @@
         android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Name"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -112,7 +110,6 @@
         android:layout_marginEnd="25dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextText6" />
 

@@ -5,6 +5,11 @@ import android.net.Uri;
 import android.util.Base64;
 import android.util.Log;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -26,7 +31,8 @@ public class Api {
         new Thread(() -> {
             HttpURLConnection conn = null;
             try {
-                URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario/login");
+//                URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario/login");
+                URL url = new URL("http://192.168.1.104:8080/tema5maven/rest/usuario/login");
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
@@ -82,7 +88,8 @@ public class Api {
     public void obtenerDatosUsuario(String username, ApiCallback<Usuario> callback) {
         new Thread(() -> {
             try {
-                URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario?username=" + username);
+//                URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario?username=" + username);
+                URL url = new URL("http://192.168.1.104:8080/tema5maven/rest/usuario?username=" + username);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -157,7 +164,8 @@ public class Api {
         new Thread(() -> {
             HttpURLConnection conn = null;
             try {
-                URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario/actualizar");
+//                URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario/actualizar");
+                URL url = new URL("http://192.168.1.104:8080/tema5maven/rest/usuario/actualizar");
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST"); // o PUT si cambias el backend
                 conn.setRequestProperty("Content-Type", "application/json");
@@ -224,7 +232,8 @@ public class Api {
                 json.put("imagen", base64Imagen);
                 json.put("idUsuario", idUsuario);
 
-                URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/publicacion/imagen");
+//                URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/publicacion/imagen");
+                URL url = new URL("http://192.168.1.104:8080/tema5maven/rest/publicacion/imagen");
                 con = (HttpURLConnection) url.openConnection();
                 con.setRequestMethod("POST");
                 con.setDoOutput(true);
@@ -257,7 +266,8 @@ public class Api {
         new Thread(() -> {
             HttpURLConnection conn = null;
             try {
-                URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario/eliminar/" + idUsuario);
+//                URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario/eliminar/" + idUsuario);
+                URL url = new URL("http://192.168.1.104:8080/tema5maven/rest/usuario/eliminar/" + idUsuario);
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("DELETE");
                 conn.setConnectTimeout(10000);
@@ -284,7 +294,28 @@ public class Api {
         }).start();
     }
 
+    public void actualizarUbicacion(int idUsuario, double latitud, double longitud, Context context) {
+//        String url = "http://10.0.2.2:8080/tema5maven/rest/usuario/ubicacion";
+        String url = "http://192.168.1.104:8080/tema5maven/rest/usuario/ubicacion";
+        RequestQueue queue = Volley.newRequestQueue(context);
 
+        try {
+            JSONObject body = new JSONObject();
+            body.put("id", idUsuario);
+            body.put("latitud", latitud);
+            body.put("longitud", longitud);
+
+            JsonObjectRequest request = new JsonObjectRequest(
+                    Request.Method.POST, url, body,
+                    response -> Log.d("UBICACION", "Ubicación actualizada"),
+                    error -> Log.e("UBICACION", "Error al actualizar ubicación")
+            );
+
+            queue.add(request);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

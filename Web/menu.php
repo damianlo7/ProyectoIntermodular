@@ -18,7 +18,9 @@ if (!isset($_SESSION["usuario"])) {
         body {
             min-height: 100vh;
             margin: 0;
-            background: linear-gradient(to top, #eaf2ff, #f8fbff);
+            background: linear-gradient(to top,  
+            rgba(42, 123, 155, 0.2),
+            rgba(87, 199, 133, 0.2))
         }
 
         .toolbar {
@@ -68,8 +70,9 @@ if (!isset($_SESSION["usuario"])) {
     <div class="toolbar">
         <span>Bienvenido, <?php echo $_SESSION["usuario"]; ?></span>
         <div class="d-flex align-items-center gap-2">
+            <img src="img/iconos/burbujachat.png" class="toolbar-btn" alt="post mensaje" onclick="mostrarFormTexto()">
             <img src="img/iconos/anadir.png" class="toolbar-btn" alt="Subir imagen" onclick="document.getElementById('inputArchivo').click()">
-            <img src="img/iconos/chat.png" class="toolbar-btn" alt="Botón 2" onclick="alert('Botón 2')">
+            <img src="img/iconos/chat.png" class="toolbar-btn" alt="mensajes" onclick="alert('La opcion de mensajes individuales todavia no esta disponible!')">
             <img src="img/iconos/usuario.png" class="toolbar-btn" alt="Perfil" onclick="window.location.href='ajustes.php'">
         </div>
     </div>
@@ -91,54 +94,59 @@ if (!isset($_SESSION["usuario"])) {
         }
 
         function mostrarPublicaciones(publicaciones) {
-    const contenedor = document.getElementById('contenedor-publicaciones');
-    contenedor.innerHTML = '';
-    const idSesion = <?php echo $_SESSION["id"]; ?>;
-    
-    publicaciones.forEach(pub => {
-        const card = document.createElement('div');
-        card.className = 'card card-publicacion';
+            const contenedor = document.getElementById('contenedor-publicaciones');
+            contenedor.innerHTML = '';
+            const idSesion = <?php echo $_SESSION["id"]; ?>;
 
-        const wrapper = document.createElement('div');
-        wrapper.style.position = 'relative';
+            publicaciones.forEach(pub => {
+                const card = document.createElement('div');
+                card.className = 'card card-publicacion';
 
-        const img = document.createElement('img');
-        img.src = 'data:image/jpeg;base64,' + pub.imagen;
-        img.className = 'card-img-top';
-        wrapper.appendChild(img);
+                const wrapper = document.createElement('div');
+                wrapper.style.position = 'relative';
 
-        if (pub.idUsuario === idSesion) {
-            const btnDiv = document.createElement('div');
-            btnDiv.style.position = 'absolute';
-            btnDiv.style.top = '8px';
-            btnDiv.style.right = '8px';
+                if (pub.imagen) {
+                    const img = document.createElement('img');
+                    img.src = 'data:image/jpeg;base64,' + pub.imagen;
+                    img.className = 'card-img-top';
+                    wrapper.appendChild(img);
+                }
 
-            const btn = document.createElement('button');
-            btn.className = 'btn btn-light btn-sm';
-            btn.style.borderRadius = '50%';
-            btn.style.width = '32px';
-            btn.style.height = '32px';
-            btn.style.padding = '0';
-            btn.style.fontSize = '16px';
-            btn.textContent = '⋯';
-            btn.addEventListener('click', () => {
-                if (confirm('¿Eliminar esta publicación?')) eliminarPublicacion(pub.id);
+                if (pub.idUsuario === idSesion) {
+                    const btnDiv = document.createElement('div');
+                    btnDiv.style.position = 'absolute';
+                    btnDiv.style.top = '8px';
+                    btnDiv.style.right = '8px';
+
+                    const btn = document.createElement('button');
+                    btn.className = 'btn btn-light btn-sm';
+                    btn.style.borderRadius = '50%';
+                    btn.style.width = '32px';
+                    btn.style.height = '32px';
+                    btn.style.padding = '0';
+                    btn.style.fontSize = '16px';
+                    btn.textContent = '⋯';
+                    btn.addEventListener('click', () => {
+                        if (confirm('¿Eliminar esta publicación?')) eliminarPublicacion(pub.id);
+                    });
+
+                    btnDiv.appendChild(btn);
+                    wrapper.appendChild(btnDiv);
+                }
+
+                const body = document.createElement('div');
+                body.className = 'card-body';
+                let contenidoBody = '<p class="card-text"><strong>@' + pub.username + '</strong></p>';
+                if (pub.texto) {
+                    contenidoBody += '<p class="card-text">' + pub.texto + '</p>';
+                }
+                body.innerHTML = contenidoBody;
+
+                card.appendChild(wrapper);
+                card.appendChild(body);
+                contenedor.appendChild(card);
             });
-
-            btnDiv.appendChild(btn);
-            wrapper.appendChild(btnDiv);
         }
-
-        const body = document.createElement('div');
-        body.className = 'card-body';
-        body.innerHTML = '<p class="card-text">@' + pub.username + '</p>';
-
-        card.appendChild(wrapper);
-        card.appendChild(body);
-        contenedor.appendChild(card);
-    });
-}
-
         async function subirImagen(file) {
             if (!file || !file.type.startsWith('image/')) {
                 alert('Solo se permiten archivos de imagen');
@@ -198,6 +206,10 @@ if (!isset($_SESSION["usuario"])) {
             }
         }
 
+
+        function mostrarFormTexto() {
+            window.location.href = 'publicar_texto.html';
+        }
         window.onload = cargarTodasPublicaciones;
     </script>
 </body>

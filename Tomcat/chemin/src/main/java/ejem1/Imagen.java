@@ -1,11 +1,13 @@
 package ejem1;
 
 public class Imagen {
-    private String nombre;   
-    private String imagen;   
+    private String nombre;
+    private String imagen;
     private int idUsuario;
+    private String texto;
 
-    public Imagen() {}
+    public Imagen() {
+    }
 
     public Imagen(String nombre, String imagen, int idUsuario) {
         this.nombre = nombre;
@@ -35,5 +37,13 @@ public class Imagen {
 
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public String getTexto() {
+        return texto;
+    }
+
+    public void setTexto(String texto) {
+        this.texto = texto;
     }
 }

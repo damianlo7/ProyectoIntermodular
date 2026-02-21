@@ -13,6 +13,8 @@ public class ImagenResponse {
     private String username;
     @JsonProperty("id")
     private int id;
+    @JsonProperty("texto")
+    private String texto;
 
     public ImagenResponse() {
     }
@@ -56,4 +58,14 @@ public class ImagenResponse {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getTexto() {
+        return texto;
+    }
+
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
+
+    
 }

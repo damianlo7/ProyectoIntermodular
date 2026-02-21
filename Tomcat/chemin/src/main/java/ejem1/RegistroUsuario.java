@@ -14,6 +14,8 @@ public class RegistroUsuario implements Serializable {
     private String contrasenha;
     private String correo;
     private String genero;
+    private double latitud;
+    private double longitud;
 
     public RegistroUsuario() {
     }
@@ -81,6 +83,22 @@ public class RegistroUsuario implements Serializable {
 
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+
+    public double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
+    }
+
+    public double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
     }
 
 }

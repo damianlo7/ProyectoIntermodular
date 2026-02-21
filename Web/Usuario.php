@@ -1,15 +1,16 @@
 <?php
 
-class Usuario {
-
+class Usuario
+{
     private $baseUrl;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->baseUrl = "http://localhost:8080/tema5maven/rest";
     }
 
-    private function request($method, $url, $data = null) {
-
+    private function request($method, $url, $data = null)
+    {
         $ch = curl_init($this->baseUrl . $url);
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -21,27 +22,31 @@ class Usuario {
         }
 
         $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        error_log("URL: " . $this->baseUrl . $url);
+        error_log("HTTP Code: " . $httpCode);
+        error_log("Response: " . $response);
 
         if (curl_errno($ch)) {
-            throw new Exception("Error en la API: " . curl_error($ch));
+            error_log("cURL error: " . curl_error($ch));
         }
 
         curl_close($ch);
-
         return json_decode($response, true);
     }
 
-    public function login($username, $password) {
-
+    public function login($username, $password)
+    {
         $data = [
             "username" => $username,
             "contrasenha" => $password
         ];
-
         return $this->request("POST", "/usuario/login", $data);
     }
 
-    public function subirImagen($idUsuario, $nombre, $imagen) {
+    public function subirImagen($idUsuario, $nombre, $imagen)
+    {
         $data = [
             "idUsuario" => $idUsuario,
             "nombre" => $nombre,
@@ -49,14 +54,53 @@ class Usuario {
         ];
         return $this->request("POST", "/publicacion/imagen", $data);
     }
-    
-    public function getPublicaciones() {
+
+    public function getPublicaciones()
+    {
         return $this->request("GET", "/publicacion/lista");
     }
-    public function eliminarPublicacion($id) {
+
+    public function eliminarPublicacion($id)
+    {
         return $this->request("DELETE", "/publicacion/eliminar/{$id}");
     }
-    public function eliminarCuenta($id) {
+
+    public function eliminarCuenta($id)
+    {
         return $this->request("DELETE", "/usuario/eliminar/{$id}");
+    }
+
+    public function publicarTexto($idUsuario, $texto)
+    {
+        $data = [
+            "idUsuario" => $idUsuario,
+            "texto" => $texto
+        ];
+        return $this->request("POST", "/publicacion/texto", $data);
+    }
+
+    public function registrar($nombre, $username, $email, $password, $genero)
+    {
+        $data = [
+            "nombreCompleto" => $nombre,
+            "username" => $username,
+            "email" => $email,
+            "contrasenha" => $password,
+            "genero" => $genero
+        ];
+        return $this->request("POST", "/usuario/registro", $data);
+    }
+
+
+    public function editarPerfil($nombre, $username, $email, $password, $genero)
+    {
+        $data = [
+            "nombreCompleto" => $nombre,
+            "username" => $username,
+            "email" => $email,
+            "contrasenha" => $password,
+            "genero" => $genero,
+        ];
+        return $this->request("POST", "/usuario/actualizar", $data);
     }
 }

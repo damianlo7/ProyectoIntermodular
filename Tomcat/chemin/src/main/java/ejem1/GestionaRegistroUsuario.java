@@ -134,6 +134,7 @@ public class GestionaRegistroUsuario {
                     .build();
         }
     }
+
     @DELETE
     @Path("/eliminar/{id}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -142,61 +143,58 @@ public class GestionaRegistroUsuario {
             Class.forName("org.mariadb.jdbc.Driver");
             try (Connection conn = DriverManager.getConnection(URL, USER, PASS)) {
                 conn.setAutoCommit(false);
-    
-                // 1. Eliminar likes de publicaciones del usuario
-                try (PreparedStatement ps = conn.prepareStatement(
-                        "DELETE FROM like_publicacion WHERE id_usuario = ?")) {
-                    ps.setInt(1, id); ps.executeUpdate();
-                }
-    
-                // 2. Eliminar likes de las publicaciones que hizo el usuario
-                try (PreparedStatement ps = conn.prepareStatement(
-                        "DELETE FROM like_publicacion WHERE id_publicacion IN (SELECT id_publicacion FROM publicacion WHERE id_usuario = ?)")) {
-                    ps.setInt(1, id); ps.executeUpdate();
-                }
-    
-                // 3. Eliminar textos de sus publicaciones
+
+                // try (PreparedStatement ps = conn.prepareStatement(
+                // "DELETE FROM like_publicacion WHERE id_usuario = ?")) {
+                // ps.setInt(1, id); ps.executeUpdate();
+                // }
+
+                // try (PreparedStatement ps = conn.prepareStatement(
+                // "DELETE FROM like_publicacion WHERE id_publicacion IN (SELECT id_publicacion
+                // FROM publicacion WHERE id_usuario = ?)")) {
+                // ps.setInt(1, id); ps.executeUpdate();
+                // }
+
                 try (PreparedStatement ps = conn.prepareStatement(
                         "DELETE FROM texto WHERE id_publicacion IN (SELECT id_publicacion FROM publicacion WHERE id_usuario = ?)")) {
-                    ps.setInt(1, id); ps.executeUpdate();
+                    ps.setInt(1, id);
+                    ps.executeUpdate();
                 }
-    
-                // 4. Eliminar imágenes del usuario
+
                 try (PreparedStatement ps = conn.prepareStatement(
                         "DELETE FROM imagen WHERE id_usuario = ?")) {
-                    ps.setInt(1, id); ps.executeUpdate();
+                    ps.setInt(1, id);
+                    ps.executeUpdate();
                 }
-    
-                // 5. Eliminar republicaciones hechas por el usuario o de sus publicaciones
-                try (PreparedStatement ps = conn.prepareStatement(
-                        "DELETE FROM republica WHERE id_usuario = ? OR id_publicacion IN (SELECT id_publicacion FROM publicacion WHERE id_usuario = ?)")) {
-                    ps.setInt(1, id); ps.setInt(2, id); ps.executeUpdate();
-                }
-    
-                // 6. Eliminar mensajes enviados o recibidos
-                try (PreparedStatement ps = conn.prepareStatement(
-                        "DELETE FROM mensaje WHERE id_usuarioE = ? OR id_usuarioR = ?")) {
-                    ps.setInt(1, id); ps.setInt(2, id); ps.executeUpdate();
-                }
-    
-                // 7. Eliminar seguidores/seguidos
-                try (PreparedStatement ps = conn.prepareStatement(
-                        "DELETE FROM seguidor WHERE id_seguidor = ? OR id_seguido = ? OR id_usuario = ?")) {
-                    ps.setInt(1, id); ps.setInt(2, id); ps.setInt(3, id); ps.executeUpdate();
-                }
-    
-                // 8. Eliminar sus publicaciones
+
+                // try (PreparedStatement ps = conn.prepareStatement(
+                // "DELETE FROM republica WHERE id_usuario = ? OR id_publicacion IN (SELECT
+                // id_publicacion FROM publicacion WHERE id_usuario = ?)")) {
+                // ps.setInt(1, id); ps.setInt(2, id); ps.executeUpdate();
+                // }
+
+                // try (PreparedStatement ps = conn.prepareStatement(
+                // "DELETE FROM mensaje WHERE id_usuarioE = ? OR id_usuarioR = ?")) {
+                // ps.setInt(1, id); ps.setInt(2, id); ps.executeUpdate();
+                // }
+
+                // try (PreparedStatement ps = conn.prepareStatement(
+                // "DELETE FROM seguidor WHERE id_seguidor = ? OR id_seguido = ? OR id_usuario =
+                // ?")) {
+                // ps.setInt(1, id); ps.setInt(2, id); ps.setInt(3, id); ps.executeUpdate();
+                // }
+
                 try (PreparedStatement ps = conn.prepareStatement(
                         "DELETE FROM publicacion WHERE id_usuario = ?")) {
-                    ps.setInt(1, id); ps.executeUpdate();
+                    ps.setInt(1, id);
+                    ps.executeUpdate();
                 }
-    
-                // 9. Por último, eliminar el usuario
+
                 try (PreparedStatement ps = conn.prepareStatement(
                         "DELETE FROM usuario WHERE id_usuario = ?")) {
                     ps.setInt(1, id);
                     int filas = ps.executeUpdate();
-    
+
                     if (filas > 0) {
                         conn.commit();
                         return Response.ok("Usuario eliminado").build();
@@ -206,13 +204,34 @@ public class GestionaRegistroUsuario {
                                 .entity("Usuario no encontrado").build();
                     }
                 }
-    
+
             }
         } catch (Exception e) {
             e.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity("Error al eliminar usuario: " + e.getMessage()).build();
         }
+
     }
 
+    @POST
+    @Path("/ubicacion")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response actualizarUbicacion(RegistroUsuario u) {
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+            try (Connection conn = DriverManager.getConnection(URL, USER, PASS);
+                    PreparedStatement ps = conn.prepareStatement(
+                            "UPDATE usuario SET latitud = ?, longitud = ? WHERE id_usuario = ?")) {
+                ps.setDouble(1, u.getLatitud());
+                ps.setDouble(2, u.getLongitud());
+                ps.setInt(3, u.getId());
+                ps.executeUpdate();
+                return Response.ok("{\"status\":\"ok\"}").build();
+            }
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }

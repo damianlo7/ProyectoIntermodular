@@ -95,7 +95,8 @@ public class CrearCuenta extends AppCompatActivity {
 
     private boolean registrarUsuarioBackend(Usuario u) {
         try {
-            URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario/registro");
+//            URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario/registro");
+            URL url = new URL("http://192.168.56.1:8080/tema5maven/rest/usuario/registro");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");

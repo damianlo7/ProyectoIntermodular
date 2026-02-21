@@ -88,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
             api.login(user, pass, usuarioObj -> {
                 runOnUiThread(() -> {
                     if (usuarioObj != null) {
-                        // Guardamos en SharedPreferences
                         SharedPreferences prefs = getSharedPreferences("CHEMIN", MODE_PRIVATE);
                         prefs.edit()
                                 .putString("username", usuarioObj.getUsername())
@@ -98,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
                                 .putInt("id", usuarioObj.getId())
                                 .apply();
 
-                        // Vamos a principal
                         Intent intent = new Intent(MainActivity.this, principal.class);
                         startActivity(intent);
                         finish();
