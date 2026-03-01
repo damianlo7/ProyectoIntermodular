@@ -49,3 +49,7 @@ Implementacion de registro web, mensajes en el chat general, sistema de edicion 
 **21/2/2026**
 <br>
 Finalice la parte de publicaciones en la app movil, ahora el usuario ya las puede ver, borrar y estan gestionadas mediante la ubicacion gps del usuario, osea que cada usuario podra ver las publicaciones de su etapa y la siguiente.
+
+**22/2/2026**
+<br>
+Finalizado la primera version de la pagima web y aplicacion movil haciendo una restructuracion final en la pagina web y eliminando el codigo sobrante autogenerado de Android Studio
