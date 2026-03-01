@@ -55,8 +55,8 @@ public class DashboardFragment extends Fragment {
             return;
         }
 
-//        String url = "http://10.0.2.2:8080/tema5maven/rest/publicacion/texto";
-        String url = "http://192.168.1.104:8080/tema5maven/rest/publicacion/texto";
+        String url = "http://10.0.2.2:8080/tema5maven/rest/publicacion/texto";
+//        String url = "http://192.168.1.104:8080/tema5maven/rest/publicacion/texto";
         RequestQueue queue = Volley.newRequestQueue(requireContext());
 
         try {

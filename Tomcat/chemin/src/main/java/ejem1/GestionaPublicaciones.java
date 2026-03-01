@@ -41,7 +41,6 @@ public class GestionaPublicaciones {
 
             try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
 
-                // obtener etapa del usuario
                 String etapa = "Santiago";
                 try (PreparedStatement ps = conn.prepareStatement(
                         "SELECT latitud, longitud FROM usuario WHERE id_usuario = ?")) {
@@ -85,7 +84,6 @@ public class GestionaPublicaciones {
 
             try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
 
-                // obtener etapa del usuario
                 String etapa = "Santiago";
                 try (PreparedStatement ps = conn.prepareStatement(
                         "SELECT latitud, longitud FROM usuario WHERE id_usuario = ?")) {
@@ -239,61 +237,61 @@ public class GestionaPublicaciones {
     // }
 
     @GET
-@Path("/lista/{idUsuario}")
-@Produces(MediaType.APPLICATION_JSON)
-public List<ImagenResponse> obtenerPublicaciones(@PathParam("idUsuario") int idUsuario) {
-    List<ImagenResponse> publicaciones = new ArrayList<>();
-    try {
-        Class.forName("org.mariadb.jdbc.Driver");
-        try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
+    @Path("/lista/{idUsuario}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<ImagenResponse> obtenerPublicaciones(@PathParam("idUsuario") int idUsuario) {
+        List<ImagenResponse> publicaciones = new ArrayList<>();
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+            try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
 
-            double latUsuario = 0, lonUsuario = 0;
-            try (PreparedStatement ps = conn.prepareStatement(
-                    "SELECT latitud, longitud FROM usuario WHERE id_usuario = ?")) {
-                ps.setInt(1, idUsuario);
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    latUsuario = rs.getDouble("latitud");
-                    lonUsuario = rs.getDouble("longitud");
-                }
-            }
-
-            int etapaActual = Etapas.calcularEtapa(latUsuario, lonUsuario);
-            int etapaSiguiente = Math.min(etapaActual + 1, Etapas.NOMBRES.length - 1);
-            String etapaActualNombre = Etapas.NOMBRES[etapaActual];
-            String etapaSiguienteNombre = Etapas.NOMBRES[etapaSiguiente];
-
-            String sql = "SELECT i.id, i.id_usuario, i.nombre, i.contenido, i.texto, i.etapa, u.username " +
-                    "FROM imagen i JOIN usuario u ON i.id_usuario = u.id_usuario " +
-                    "WHERE i.etapa = ? OR i.etapa = ? " +
-                    "ORDER BY i.id DESC";
-
-            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setString(1, etapaActualNombre);
-                stmt.setString(2, etapaSiguienteNombre);
-
-                ResultSet rs = stmt.executeQuery();
-                while (rs.next()) {
-                    ImagenResponse imgRes = new ImagenResponse();
-                    imgRes.setId(rs.getInt("id"));
-                    imgRes.setIdUsuario(rs.getInt("id_usuario"));
-                    imgRes.setNombre(rs.getString("nombre"));
-                    imgRes.setUsername(rs.getString("username"));
-                    imgRes.setTexto(rs.getString("texto"));
-
-                    byte[] bytes = rs.getBytes("contenido");
-                    if (bytes != null) {
-                        imgRes.setImagen(Base64.getEncoder().encodeToString(bytes));
+                double latUsuario = 0, lonUsuario = 0;
+                try (PreparedStatement ps = conn.prepareStatement(
+                        "SELECT latitud, longitud FROM usuario WHERE id_usuario = ?")) {
+                    ps.setInt(1, idUsuario);
+                    ResultSet rs = ps.executeQuery();
+                    if (rs.next()) {
+                        latUsuario = rs.getDouble("latitud");
+                        lonUsuario = rs.getDouble("longitud");
                     }
-                    publicaciones.add(imgRes);
+                }
+
+                int etapaActual = Etapas.calcularEtapa(latUsuario, lonUsuario);
+                int etapaSiguiente = Math.min(etapaActual + 1, Etapas.NOMBRES.length - 1);
+                String etapaActualNombre = Etapas.NOMBRES[etapaActual];
+                String etapaSiguienteNombre = Etapas.NOMBRES[etapaSiguiente];
+
+                String sql = "SELECT i.id, i.id_usuario, i.nombre, i.contenido, i.texto, i.etapa, u.username " +
+                        "FROM imagen i JOIN usuario u ON i.id_usuario = u.id_usuario " +
+                        "WHERE i.etapa = ? OR i.etapa = ? " +
+                        "ORDER BY i.id DESC";
+
+                try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                    stmt.setString(1, etapaActualNombre);
+                    stmt.setString(2, etapaSiguienteNombre);
+
+                    ResultSet rs = stmt.executeQuery();
+                    while (rs.next()) {
+                        ImagenResponse imgRes = new ImagenResponse();
+                        imgRes.setId(rs.getInt("id"));
+                        imgRes.setIdUsuario(rs.getInt("id_usuario"));
+                        imgRes.setNombre(rs.getString("nombre"));
+                        imgRes.setUsername(rs.getString("username"));
+                        imgRes.setTexto(rs.getString("texto"));
+
+                        byte[] bytes = rs.getBytes("contenido");
+                        if (bytes != null) {
+                            imgRes.setImagen(Base64.getEncoder().encodeToString(bytes));
+                        }
+                        publicaciones.add(imgRes);
+                    }
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    } catch (Exception e) {
-        e.printStackTrace();
+        return publicaciones;
     }
-    return publicaciones;
-}
 
     @DELETE
     @Path("/eliminar/{id}")

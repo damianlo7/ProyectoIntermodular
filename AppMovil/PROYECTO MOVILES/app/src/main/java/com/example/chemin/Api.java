@@ -31,8 +31,8 @@ public class Api {
         new Thread(() -> {
             HttpURLConnection conn = null;
             try {
-//                URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario/login");
-                URL url = new URL("http://192.168.1.104:8080/tema5maven/rest/usuario/login");
+              URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario/login");
+//                URL url = new URL("http://192.168.1.104:8080/tema5maven/rest/usuario/login");
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
@@ -88,8 +88,8 @@ public class Api {
     public void obtenerDatosUsuario(String username, ApiCallback<Usuario> callback) {
         new Thread(() -> {
             try {
-//                URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario?username=" + username);
-                URL url = new URL("http://192.168.1.104:8080/tema5maven/rest/usuario?username=" + username);
+               URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario?username=" + username);
+//                URL url = new URL("http://192.168.1.104:8080/tema5maven/rest/usuario?username=" + username);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -164,10 +164,10 @@ public class Api {
         new Thread(() -> {
             HttpURLConnection conn = null;
             try {
-//                URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario/actualizar");
-                URL url = new URL("http://192.168.1.104:8080/tema5maven/rest/usuario/actualizar");
+                URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario/actualizar");
+//                URL url = new URL("http://192.168.1.104:8080/tema5maven/rest/usuario/actualizar");
                 conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("POST"); // o PUT si cambias el backend
+                conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type", "application/json");
                 conn.setDoOutput(true);
 
@@ -232,8 +232,8 @@ public class Api {
                 json.put("imagen", base64Imagen);
                 json.put("idUsuario", idUsuario);
 
-//                URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/publicacion/imagen");
-                URL url = new URL("http://192.168.1.104:8080/tema5maven/rest/publicacion/imagen");
+               URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/publicacion/imagen");
+//                URL url = new URL("http://192.168.1.104:8080/tema5maven/rest/publicacion/imagen");
                 con = (HttpURLConnection) url.openConnection();
                 con.setRequestMethod("POST");
                 con.setDoOutput(true);
@@ -266,8 +266,8 @@ public class Api {
         new Thread(() -> {
             HttpURLConnection conn = null;
             try {
-//                URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario/eliminar/" + idUsuario);
-                URL url = new URL("http://192.168.1.104:8080/tema5maven/rest/usuario/eliminar/" + idUsuario);
+              URL url = new URL("http://10.0.2.2:8080/tema5maven/rest/usuario/eliminar/" + idUsuario);
+//                URL url = new URL("http://192.168.1.104:8080/tema5maven/rest/usuario/eliminar/" + idUsuario);
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("DELETE");
                 conn.setConnectTimeout(10000);
@@ -295,8 +295,8 @@ public class Api {
     }
 
     public void actualizarUbicacion(int idUsuario, double latitud, double longitud, Context context) {
-//        String url = "http://10.0.2.2:8080/tema5maven/rest/usuario/ubicacion";
-        String url = "http://192.168.1.104:8080/tema5maven/rest/usuario/ubicacion";
+        String url = "http://10.0.2.2:8080/tema5maven/rest/usuario/ubicacion";
+//        String url = "http://192.168.1.104:8080/tema5maven/rest/usuario/ubicacion";
         RequestQueue queue = Volley.newRequestQueue(context);
 
         try {

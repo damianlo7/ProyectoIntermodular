@@ -94,8 +94,8 @@ public class principal extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("CHEMIN", MODE_PRIVATE);
         int idUsuario = prefs.getInt("id", -1);
 
-//        String url = "http://10.0.2.2:8080/tema5maven/rest/publicacion/lista/" + idUsuario;
-        String url = "http://192.168.1.104:8080/tema5maven/rest/publicacion/lista/" + idUsuario;
+        String url = "http://10.0.2.2:8080/tema5maven/rest/publicacion/lista/" + idUsuario;
+//        String url = "http://192.168.1.104:8080/tema5maven/rest/publicacion/lista/" + idUsuario;
         RequestQueue queue = Volley.newRequestQueue(this);
 
         JsonArrayRequest request = new JsonArrayRequest(

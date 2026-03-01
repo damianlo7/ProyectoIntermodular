@@ -85,8 +85,8 @@ public class AdaptadorPublicaciones extends RecyclerView.Adapter<AdaptadorPublic
     }
 
     private void eliminarPublicacion(Context context, int id, int position) {
-//        String url = "http://10.0.2.2:8080/tema5maven/rest/publicacion/eliminar/" + id;
-        String url = "http://192.168.1.104:8080/tema5maven/rest/publicacion/eliminar/" + id;
+        String url = "http://10.0.2.2:8080/tema5maven/rest/publicacion/eliminar/" + id;
+//        String url = "http://192.168.1.104:8080/tema5maven/rest/publicacion/eliminar/" + id;
         RequestQueue queue = Volley.newRequestQueue(context);
 
         StringRequest request = new StringRequest(Request.Method.DELETE, url,
