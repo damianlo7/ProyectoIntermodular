@@ -1,0 +1,13 @@
+C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\bin\Debug\chemin.exe.config
+C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\bin\Debug\chemin.exe
+C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\bin\Debug\chemin.pdb
+C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\obj\Debug\chemin.csproj.AssemblyReference.cache
+C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\obj\Debug\chemin.Form1.resources
+C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\obj\Debug\chemin.Properties.Resources.resources
+C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\obj\Debug\chemin.csproj.GenerateResource.cache
+C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\obj\Debug\chemin.csproj.CoreCompileInputs.cache
+C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\obj\Debug\chemin.exe
+C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\obj\Debug\chemin.pdb
+C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\obj\Debug\chemin.exe.config
+C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\obj\Debug\chemin.FormPrincipal.resources
+C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\obj\Debug\chemin.FormRegistro.resources
