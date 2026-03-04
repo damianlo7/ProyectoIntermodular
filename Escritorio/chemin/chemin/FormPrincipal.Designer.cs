@@ -38,7 +38,7 @@
             this.btnTexto.FlatAppearance.BorderSize = 0;
             this.btnTexto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTexto.Image = global::chemin.Properties.Resources.burbujachat;
-            this.btnTexto.Location = new System.Drawing.Point(615, 23);
+            this.btnTexto.Location = new System.Drawing.Point(626, 23);
             this.btnTexto.Name = "btnTexto";
             this.btnTexto.Size = new System.Drawing.Size(50, 50);
             this.btnTexto.TabIndex = 2;
@@ -79,6 +79,7 @@
             this.Controls.Add(this.btnPerfil);
             this.Name = "FormPrincipal";
             this.Text = "FormPrincipal";
+            this.Load += new System.EventHandler(this.FormPrincipal_Load);
             this.ResumeLayout(false);
 
         }

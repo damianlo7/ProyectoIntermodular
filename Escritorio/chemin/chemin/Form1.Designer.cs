@@ -41,7 +41,7 @@
             // 
             this.btnEntrar.Location = new System.Drawing.Point(336, 293);
             this.btnEntrar.Name = "btnEntrar";
-            this.btnEntrar.Size = new System.Drawing.Size(111, 36);
+            this.btnEntrar.Size = new System.Drawing.Size(120, 36);
             this.btnEntrar.TabIndex = 0;
             this.btnEntrar.Text = "entrar";
             this.btnEntrar.UseVisualStyleBackColor = true;
@@ -82,9 +82,9 @@
             // 
             // btnRegistro
             // 
-            this.btnRegistro.Location = new System.Drawing.Point(336, 367);
+            this.btnRegistro.Location = new System.Drawing.Point(336, 378);
             this.btnRegistro.Name = "btnRegistro";
-            this.btnRegistro.Size = new System.Drawing.Size(111, 46);
+            this.btnRegistro.Size = new System.Drawing.Size(120, 46);
             this.btnRegistro.TabIndex = 6;
             this.btnRegistro.Text = "registrate";
             this.btnRegistro.UseVisualStyleBackColor = true;
