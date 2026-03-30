@@ -11,5 +11,11 @@ namespace chemin
         public static int Id { get; set; }
         public static string Username { get; set; }
         public static string Nombre { get; set; }
+        public static void Cerrar()
+        {
+            Id = 0;
+            Username = null;
+            Nombre = null;
+        }
     }
 }

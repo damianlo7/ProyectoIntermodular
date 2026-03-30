@@ -28,17 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRegistro));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.button1 = new System.Windows.Forms.Button();
+            this.txtCorreo = new System.Windows.Forms.TextBox();
+            this.txtContraseña = new System.Windows.Forms.TextBox();
+            this.txtNombreUsuario = new System.Windows.Forms.TextBox();
+            this.rbH = new System.Windows.Forms.RadioButton();
+            this.rbO = new System.Windows.Forms.RadioButton();
+            this.rbM = new System.Windows.Forms.RadioButton();
+            this.btnRegistrar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -77,87 +78,91 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "genero";
             // 
-            // textBox1
+            // txtCorreo
             // 
-            this.textBox1.Location = new System.Drawing.Point(375, 35);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(228, 31);
-            this.textBox1.TabIndex = 4;
+            this.txtCorreo.Location = new System.Drawing.Point(375, 35);
+            this.txtCorreo.Name = "txtCorreo";
+            this.txtCorreo.Size = new System.Drawing.Size(228, 31);
+            this.txtCorreo.TabIndex = 4;
             // 
-            // textBox2
+            // txtContraseña
             // 
-            this.textBox2.Location = new System.Drawing.Point(375, 96);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(228, 31);
-            this.textBox2.TabIndex = 5;
+            this.txtContraseña.Location = new System.Drawing.Point(375, 96);
+            this.txtContraseña.Name = "txtContraseña";
+            this.txtContraseña.Size = new System.Drawing.Size(228, 31);
+            this.txtContraseña.TabIndex = 5;
             // 
-            // textBox3
+            // txtNombreUsuario
             // 
-            this.textBox3.Location = new System.Drawing.Point(375, 162);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(228, 31);
-            this.textBox3.TabIndex = 6;
+            this.txtNombreUsuario.Location = new System.Drawing.Point(375, 162);
+            this.txtNombreUsuario.Name = "txtNombreUsuario";
+            this.txtNombreUsuario.Size = new System.Drawing.Size(228, 31);
+            this.txtNombreUsuario.TabIndex = 6;
             // 
-            // radioButton1
+            // rbH
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(375, 226);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(115, 29);
-            this.radioButton1.TabIndex = 7;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "hombre";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rbH.AutoSize = true;
+            this.rbH.Location = new System.Drawing.Point(375, 226);
+            this.rbH.Name = "rbH";
+            this.rbH.Size = new System.Drawing.Size(115, 29);
+            this.rbH.TabIndex = 7;
+            this.rbH.TabStop = true;
+            this.rbH.Text = "hombre";
+            this.rbH.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // rbO
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(598, 226);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(80, 29);
-            this.radioButton2.TabIndex = 8;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "otro";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rbO.AutoSize = true;
+            this.rbO.Location = new System.Drawing.Point(598, 226);
+            this.rbO.Name = "rbO";
+            this.rbO.Size = new System.Drawing.Size(80, 29);
+            this.rbO.TabIndex = 8;
+            this.rbO.TabStop = true;
+            this.rbO.Text = "otro";
+            this.rbO.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // rbM
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(496, 226);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(96, 29);
-            this.radioButton3.TabIndex = 9;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "mujer";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.rbM.AutoSize = true;
+            this.rbM.Location = new System.Drawing.Point(496, 226);
+            this.rbM.Name = "rbM";
+            this.rbM.Size = new System.Drawing.Size(96, 29);
+            this.rbM.TabIndex = 9;
+            this.rbM.TabStop = true;
+            this.rbM.Text = "mujer";
+            this.rbM.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnRegistrar
             // 
-            this.button1.Location = new System.Drawing.Point(375, 311);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(151, 47);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "registrar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnRegistrar.Location = new System.Drawing.Point(375, 311);
+            this.btnRegistrar.Name = "btnRegistrar";
+            this.btnRegistrar.Size = new System.Drawing.Size(151, 47);
+            this.btnRegistrar.TabIndex = 10;
+            this.btnRegistrar.Text = "registrar";
+            this.btnRegistrar.UseVisualStyleBackColor = true;
+            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
             // FormRegistro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.radioButton3);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnRegistrar);
+            this.Controls.Add(this.rbM);
+            this.Controls.Add(this.rbO);
+            this.Controls.Add(this.rbH);
+            this.Controls.Add(this.txtNombreUsuario);
+            this.Controls.Add(this.txtContraseña);
+            this.Controls.Add(this.txtCorreo);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormRegistro";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registro";
+            this.Load += new System.EventHandler(this.FormRegistro_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,12 +174,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtCorreo;
+        private System.Windows.Forms.TextBox txtContraseña;
+        private System.Windows.Forms.TextBox txtNombreUsuario;
+        private System.Windows.Forms.RadioButton rbH;
+        private System.Windows.Forms.RadioButton rbO;
+        private System.Windows.Forms.RadioButton rbM;
+        private System.Windows.Forms.Button btnRegistrar;
     }
 }

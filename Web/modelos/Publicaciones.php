@@ -51,7 +51,8 @@ class Publicaciones
 
     public function obtenerTodas()
     {
-        return $this->request("GET", "/publicacion/imagen");
+        $idUsuario = $_SESSION['id'];
+        return $this->request("GET", "/publicacion/lista/{$idUsuario}");
     }
 
     public function obtener($idUsuario)

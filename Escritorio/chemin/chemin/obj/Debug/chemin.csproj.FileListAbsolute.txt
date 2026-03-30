@@ -14,3 +14,7 @@ C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\obj\Debug\chemin.
 C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\obj\Debug\chemin.FormEnviarImagen.resources
 C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\obj\Debug\chemin.FormEnviarTexto.resources
 C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\obj\Debug\chemin.FormPerfil.resources
+C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\bin\Debug\Newtonsoft.Json.dll
+C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\bin\Debug\Newtonsoft.Json.xml
+C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\obj\Debug\chemin.TarjetaPublicacion.resources
+C:\Users\damia\Desktop\proyectoCHEMIN\Escritorio\chemin\chemin\obj\Debug\chemin.csproj.Up2Date

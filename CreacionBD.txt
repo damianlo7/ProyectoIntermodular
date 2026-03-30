@@ -1,0 +1,100 @@
+CREATE DATABASE IF NOT EXISTS prueba_chemin;
+USE prueba_chemin;
+
+CREATE TABLE usuario (
+  id_usuario int(11) NOT NULL AUTO_INCREMENT,
+  nombre varchar(100) NOT NULL,
+  username varchar(50) NOT NULL,
+  email varchar(100) NOT NULL,
+  ubicacion varchar(100) DEFAULT NULL,
+  fecha_nacimiento date DEFAULT NULL,
+  edad int(11) DEFAULT NULL,
+  contrasenha varchar(255) NOT NULL,
+  latitud double DEFAULT NULL,
+  longitud double DEFAULT NULL,
+  genero varchar(20) DEFAULT NULL,
+  PRIMARY KEY (id_usuario),
+  UNIQUE KEY username (username),
+  UNIQUE KEY email (email)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE publicacion (
+  id_publicacion int(11) NOT NULL AUTO_INCREMENT,
+  id_usuario int(11) NOT NULL,
+  fecha_publicacion datetime NOT NULL,
+  PRIMARY KEY (id_publicacion),
+  KEY id_usuario (id_usuario),
+  CONSTRAINT publicacion_ibfk_1 FOREIGN KEY (id_usuario)
+    REFERENCES usuario (id_usuario) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE imagen (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  id_usuario int(11) NOT NULL,
+  nombre varchar(255) NOT NULL,
+  contenido longblob DEFAULT NULL,
+  texto text DEFAULT NULL,
+  etapa varchar(100) DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY id_usuario (id_usuario),
+  CONSTRAINT imagen_ibfk_1 FOREIGN KEY (id_usuario)
+    REFERENCES usuario (id_usuario) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE texto (
+  id_publicacion int(11) NOT NULL,
+  texto text NOT NULL,
+  PRIMARY KEY (id_publicacion),
+  CONSTRAINT texto_ibfk_1 FOREIGN KEY (id_publicacion)
+    REFERENCES publicacion (id_publicacion) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE like_publicacion (
+  id_usuario int(11) NOT NULL,
+  id_publicacion int(11) NOT NULL,
+  fecha_like datetime NOT NULL,
+  PRIMARY KEY (id_usuario, id_publicacion),
+  KEY id_publicacion (id_publicacion),
+  CONSTRAINT like_publicacion_ibfk_1 FOREIGN KEY (id_usuario)
+    REFERENCES usuario (id_usuario) ON DELETE CASCADE,
+  CONSTRAINT like_publicacion_ibfk_2 FOREIGN KEY (id_publicacion)
+    REFERENCES publicacion (id_publicacion) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE republica (
+  id_usuario int(11) NOT NULL,
+  id_publicacion int(11) NOT NULL,
+  fecha_republicacion datetime NOT NULL,
+  PRIMARY KEY (id_usuario, id_publicacion),
+  KEY id_publicacion (id_publicacion),
+  CONSTRAINT republica_ibfk_1 FOREIGN KEY (id_usuario)
+    REFERENCES usuario (id_usuario) ON DELETE CASCADE,
+  CONSTRAINT republica_ibfk_2 FOREIGN KEY (id_publicacion)
+    REFERENCES publicacion (id_publicacion) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE seguidor (
+  id_seguidor int(11) NOT NULL,
+  id_seguido int(11) NOT NULL,
+  PRIMARY KEY (id_seguidor, id_seguido),
+  KEY id_seguido (id_seguido),
+  CONSTRAINT seguidor_ibfk_1 FOREIGN KEY (id_seguidor)
+    REFERENCES usuario (id_usuario) ON DELETE CASCADE,
+  CONSTRAINT seguidor_ibfk_2 FOREIGN KEY (id_seguido)
+    REFERENCES usuario (id_usuario) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE mensaje (
+  id_mensaje int(11) NOT NULL AUTO_INCREMENT,
+  id_usuarioE int(11) NOT NULL,
+  id_usuarioR int(11) NOT NULL,
+  fecha datetime NOT NULL,
+  contenido text NOT NULL,
+  PRIMARY KEY (id_mensaje),
+  KEY id_usuarioE (id_usuarioE),
+  KEY id_usuarioR (id_usuarioR),
+  CONSTRAINT mensaje_ibfk_1 FOREIGN KEY (id_usuarioE)
+    REFERENCES usuario (id_usuario) ON DELETE CASCADE,
+  CONSTRAINT mensaje_ibfk_2 FOREIGN KEY (id_usuarioR)
+    REFERENCES usuario (id_usuario) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

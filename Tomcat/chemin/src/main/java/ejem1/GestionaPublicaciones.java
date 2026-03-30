@@ -114,6 +114,41 @@ public class GestionaPublicaciones {
         }
     }
 
+    @GET
+    @Path("/lista")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<ImagenResponse> obtenerTodasPublicaciones() {
+        List<ImagenResponse> publicaciones = new ArrayList<>();
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+            try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
+                    PreparedStatement stmt = conn.prepareStatement(
+                            "SELECT i.id, i.id_usuario, i.nombre, i.contenido, i.texto, i.etapa, u.username " +
+                                    "FROM imagen i JOIN usuario u ON i.id_usuario = u.id_usuario " +
+                                    "ORDER BY i.id DESC")) {
+
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    ImagenResponse imgRes = new ImagenResponse();
+                    imgRes.setId(rs.getInt("id"));
+                    imgRes.setIdUsuario(rs.getInt("id_usuario"));
+                    imgRes.setNombre(rs.getString("nombre"));
+                    imgRes.setUsername(rs.getString("username"));
+                    imgRes.setTexto(rs.getString("texto"));
+
+                    byte[] bytes = rs.getBytes("contenido");
+                    if (bytes != null) {
+                        imgRes.setImagen(Base64.getEncoder().encodeToString(bytes));
+                    }
+                    publicaciones.add(imgRes);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return publicaciones;
+    }
+
     // @POST
     // @Path("/imagen")
     // @Consumes(MediaType.APPLICATION_JSON)
